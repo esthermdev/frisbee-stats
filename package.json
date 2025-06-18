@@ -30,5 +30,6 @@
     "concurrently": "^9.1.2",
     "nodemon": "^3.1.9",
     "prisma": "^6.6.0"
-  }
+  },
+  "proxy": "http://localhost:5000"
 }
