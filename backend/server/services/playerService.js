@@ -13,8 +13,17 @@ class PlayerService {
     return players.map(player => {
       const { turnovers: playerTurnovers, ...playerStats } = player;
       
+      // Map team values from DB to frontend expected values
+      const teamMapping = {
+        'O': 'Offence',
+        'D': 'Defence',
+        'Offence': 'Offence',
+        'Defence': 'Defence'
+      };
+      
       const safePlayerStats = {
         ...playerStats,
+        team: teamMapping[playerStats.team] || playerStats.team,
         turnovers: playerTurnovers?.length || 0,
         rzto: playerStats.rzto || 0,
         hto: playerStats.hto || 0,
@@ -43,10 +52,45 @@ class PlayerService {
   }
 
   async updatePlayerStat(id, stat, value = 1) {
-    return await prisma.player.update({
+    const player = await prisma.player.update({
       where: { id: parseInt(id) },
-      data: { [stat]: { increment: value } }
+      data: { [stat]: { increment: value } },
+      include: {
+        turnovers: true
+      }
     });
+
+    // Apply the same formatting as getAllPlayers
+    const { turnovers: playerTurnovers, ...playerStats } = player;
+    
+    const teamMapping = {
+      'O': 'Offence',
+      'D': 'Defence',
+      'Offence': 'Offence',
+      'Defence': 'Defence'
+    };
+    
+    const safePlayerStats = {
+      ...playerStats,
+      team: teamMapping[playerStats.team] || playerStats.team,
+      turnovers: playerTurnovers?.length || 0,
+      rzto: playerStats.rzto || 0,
+      hto: playerStats.hto || 0,
+      resetTo: playerStats.resetTo || 0,
+      receiverErr: playerStats.receiverErr || 0,
+      throwerErr: playerStats.throwerErr || 0
+    };
+    
+    const turnoverDetails = playerTurnovers?.map(to => ({
+      id: to.id,
+      type: to.type,
+      timestamp: to.timestamp || ''
+    })) || [];
+    
+    return {
+      ...safePlayerStats,
+      turnoverDetails
+    };
   }
 
   async addTurnover(id, type, timestamp) {
@@ -64,8 +108,9 @@ class PlayerService {
       throw new Error('Invalid turnover type');
     }
 
+    let player;
     if (fieldToUpdate === 'regular') {
-      return await prisma.player.update({
+      player = await prisma.player.update({
         where: { id: parseInt(id) },
         data: {
           turnovers: {
@@ -80,7 +125,7 @@ class PlayerService {
         }
       });
     } else {
-      return await prisma.player.update({
+      player = await prisma.player.update({
         where: { id: parseInt(id) },
         data: {
           [fieldToUpdate]: { increment: 1 },
@@ -96,6 +141,38 @@ class PlayerService {
         }
       });
     }
+
+    // Apply the same formatting as getAllPlayers
+    const { turnovers: playerTurnovers, ...playerStats } = player;
+    
+    const teamMapping = {
+      'O': 'Offence',
+      'D': 'Defence',
+      'Offence': 'Offence',
+      'Defence': 'Defence'
+    };
+    
+    const safePlayerStats = {
+      ...playerStats,
+      team: teamMapping[playerStats.team] || playerStats.team,
+      turnovers: playerTurnovers?.length || 0,
+      rzto: playerStats.rzto || 0,
+      hto: playerStats.hto || 0,
+      resetTo: playerStats.resetTo || 0,
+      receiverErr: playerStats.receiverErr || 0,
+      throwerErr: playerStats.throwerErr || 0
+    };
+    
+    const turnoverDetails = playerTurnovers?.map(to => ({
+      id: to.id,
+      type: to.type,
+      timestamp: to.timestamp || ''
+    })) || [];
+    
+    return {
+      ...safePlayerStats,
+      turnoverDetails
+    };
   }
 
   async deletePlayer(id) {

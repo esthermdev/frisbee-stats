@@ -5,6 +5,10 @@ const routes = require('./routes');
 
 const app = express();
 
+app.use(cors({
+  origin: ['http://localhost:3000', 'http://frontend:80'],
+  credentials: true
+}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 

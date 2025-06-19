@@ -1,0 +1,244 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #f8f9fa;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 30px;
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.player-form {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 30px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.player-form input,
+.player-form select,
+.player-form button {
+  margin: 5px;
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.player-form button {
+  background: #007bff;
+  color: white;
+  cursor: pointer;
+}
+
+.player-form button:hover {
+  background: #0056b3;
+}
+
+.team-section {
+  margin-bottom: 40px;
+}
+
+.team-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.team-title {
+  margin: 0;
+  color: #333;
+  font-size: 1.5rem;
+}
+
+.export-btn {
+  background: #28a745;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.export-btn:hover {
+  background: #218838;
+}
+
+.players-table {
+  width: 100%;
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  border-collapse: collapse;
+}
+
+.players-table th,
+.players-table td {
+  padding: 6px 4px;
+  text-align: center;
+  border-bottom: 1px solid #dee2e6;
+  font-size: 13px;
+}
+
+.players-table th {
+  background: #f8f9fa;
+  font-weight: 600;
+  color: #495057;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.players-table tbody tr:hover {
+  background-color: #f5f5f5;
+}
+
+.stat-cell {
+  position: relative;
+  padding: 2px;
+}
+
+.stat-value {
+  font-weight: 600;
+  font-size: 16px;
+  color: #333;
+  margin: 0 2px;
+  min-width: 25px;
+  display: inline-block;
+}
+
+.stat-controls {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+}
+
+.stat-btn {
+  width: 18px;
+  height: 18px;
+  border: 1px solid #ddd;
+  background: #f8f9fa;
+  cursor: pointer;
+  border-radius: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: bold;
+  transition: all 0.1s;
+}
+
+.compact-stat-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1px;
+}
+
+.stat-btn:hover {
+  background: #e9ecef;
+  transform: scale(1.1);
+}
+
+.stat-btn.increment {
+  color: #28a745;
+}
+
+.stat-btn.decrement {
+  color: #dc3545;
+}
+
+.action-btn {
+  padding: 2px 4px;
+  margin: 1px;
+  font-size: 9px;
+  border: 1px solid #ddd;
+  background: #f8f9fa;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: background-color 0.1s;
+}
+
+.action-btn:hover {
+  background: #e9ecef;
+}
+
+.action-btn.goal { background: #d4edda; color: #155724; }
+.action-btn.assist { background: #d1ecf1; color: #0c5460; }
+.action-btn.defense { background: #fff3cd; color: #856404; }
+.action-btn.huck { background: #e2e3e5; color: #383d41; }
+
+.turnover-btn {
+  background: #f8d7da;
+  color: #721c24;
+  font-size: 10px;
+  padding: 2px 4px;
+  margin: 1px;
+}
+
+.delete-btn {
+  background: #dc3545;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.delete-btn:hover {
+  background: #c82333;
+}
+
+.no-players {
+  text-align: center;
+  padding: 40px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+@media (max-width: 768px) {
+  .players-table {
+    font-size: 12px;
+  }
+  
+  .players-table th,
+  .players-table td {
+    padding: 8px 4px;
+  }
+  
+  .stat-btn {
+    width: 20px;
+    height: 20px;
+  }
+  
+  .action-btn {
+    font-size: 9px;
+    padding: 2px 4px;
+  }
+}
