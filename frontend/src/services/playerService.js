@@ -26,6 +26,13 @@ class PlayerService {
     return response.data;
   }
 
+  async removeTurnover(playerId, type) {
+    const response = await axios.delete(`${API_BASE_URL}/players/${playerId}/turnover/remove`, {
+      data: { type }
+    });
+    return response.data;
+  }
+
   async deletePlayer(playerId) {
     await axios.delete(`${API_BASE_URL}/players/${playerId}`);
     return true;

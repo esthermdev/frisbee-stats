@@ -65,7 +65,7 @@ const ExportButton = ({ players }) => {
 
   return (
     <button className="export-btn" onClick={exportToExcel}>
-      Export All Stats to Excel
+      Export Stats
     </button>
   );
 };

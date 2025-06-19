@@ -56,6 +56,19 @@ class PlayerController {
     }
   }
 
+  async removeTurnover(req, res) {
+    try {
+      const { id } = req.params;
+      const { type } = req.body;
+
+      const player = await playerService.removeTurnover(id, type);
+      res.json(player);
+    } catch (error) {
+      console.error('Error removing turnover:', error);
+      res.status(400).json({ error: 'Failed to remove turnover' });
+    }
+  }
+
   async deletePlayer(req, res) {
     try {
       const { id } = req.params;

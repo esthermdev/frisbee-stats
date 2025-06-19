@@ -175,6 +175,97 @@ class PlayerService {
     };
   }
 
+  async removeTurnover(id, type) {
+    const typeMap = {
+      'RZTO': 'rzto',
+      'HTO': 'hto',
+      'Reset TO': 'resetTo',
+      'Receiver Err': 'receiverErr',
+      'Thrower Err': 'throwerErr',
+      'Turnover': 'regular'
+    };
+
+    const fieldToUpdate = typeMap[type];
+    if (!fieldToUpdate) {
+      throw new Error('Invalid turnover type');
+    }
+
+    // Find the most recent turnover of this type for the player
+    const mostRecentTurnover = await prisma.turnover.findFirst({
+      where: {
+        playerId: parseInt(id),
+        type: fieldToUpdate
+      },
+      orderBy: {
+        createdAt: 'desc'
+      }
+    });
+
+    if (!mostRecentTurnover) {
+      throw new Error('No turnover of this type found to remove');
+    }
+
+    let player;
+    if (fieldToUpdate === 'regular') {
+      // For regular turnovers, just delete the record
+      await prisma.turnover.delete({
+        where: { id: mostRecentTurnover.id }
+      });
+      
+      player = await prisma.player.findUnique({
+        where: { id: parseInt(id) },
+        include: { turnovers: true }
+      });
+    } else {
+      // For specific turnover types, decrement the field and delete the record
+      await prisma.turnover.delete({
+        where: { id: mostRecentTurnover.id }
+      });
+      
+      player = await prisma.player.update({
+        where: { id: parseInt(id) },
+        data: {
+          [fieldToUpdate]: { decrement: 1 }
+        },
+        include: {
+          turnovers: true
+        }
+      });
+    }
+
+    // Apply the same formatting as getAllPlayers
+    const { turnovers: playerTurnovers, ...playerStats } = player;
+    
+    const teamMapping = {
+      'O': 'Offence',
+      'D': 'Defence',
+      'Offence': 'Offence',
+      'Defence': 'Defence'
+    };
+    
+    const safePlayerStats = {
+      ...playerStats,
+      team: teamMapping[playerStats.team] || playerStats.team,
+      turnovers: playerTurnovers?.length || 0,
+      rzto: playerStats.rzto || 0,
+      hto: playerStats.hto || 0,
+      resetTo: playerStats.resetTo || 0,
+      receiverErr: playerStats.receiverErr || 0,
+      throwerErr: playerStats.throwerErr || 0
+    };
+    
+    const turnoverDetails = playerTurnovers?.map(to => ({
+      id: to.id,
+      type: to.type,
+      timestamp: to.timestamp || ''
+    })) || [];
+    
+    return {
+      ...safePlayerStats,
+      turnoverDetails
+    };
+  }
+
   async deletePlayer(id) {
     return await prisma.player.delete({
       where: { id: parseInt(id) }

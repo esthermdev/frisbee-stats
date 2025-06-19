@@ -7,6 +7,7 @@ router.get('/', playerController.getAllPlayers);
 router.post('/', playerController.createPlayer);
 router.patch('/:id/stat/:stat', playerController.updatePlayerStat);
 router.post('/:id/turnover', playerController.addTurnover);
+router.delete('/:id/turnover/remove', playerController.removeTurnover);
 router.delete('/:id', playerController.deletePlayer);
 
 module.exports = router;
