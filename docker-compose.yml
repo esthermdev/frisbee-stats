@@ -1,11 +1,11 @@
 services:
   # Backend service
-  api:
+  backend:
     build: 
-      context: .
-      dockerfile: Dockerfile.api
+      context: ./backend
+      dockerfile: Dockerfile
     ports:
-      - "5002:5000"
+      - "5001:5000"
       - "5555:5555"
     environment:
       - DATABASE_URL=postgresql://postgres:plasticplate@db:5432/ultimatestats
@@ -15,32 +15,38 @@ services:
     networks:
       - app-network
     volumes:
-      - ./:/app
+      - ./backend:/app
       - /app/node_modules
     logging:
       driver: "json-file"
       options:
         max-size: "10m"
         max-file: "3"
-        tag: "ultimate-api"
+        tag: "ultimate-backend"
 
   # Frontend service
-  client:
+  frontend:
     build:
-      context: ./client
-      dockerfile: Dockerfile.client
+      context: ./frontend
+      dockerfile: Dockerfile
     ports:
-      - "3000:80"
+      - "3000:3000"
     depends_on:
-      - api
+      - backend
     networks:
       - app-network
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    environment:
+      - REACT_APP_API_URL=/api
+      - CHOKIDAR_USEPOLLING=true
     logging:
       driver: "json-file"
       options:
         max-size: "10m"
         max-file: "3"
-        tag: "ultimate-client"
+        tag: "ultimate-frontend"
 
   # Database service
   db:
