@@ -57,49 +57,130 @@ code {
   font-size: 1.1rem;
 }
 
-/* Player form */
-.player-form {
+/* Enhanced Player Form */
+.enhanced-player-form {
   background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(10px);
-  padding: 30px;
+  padding: 32px;
   border-radius: 20px;
   margin-bottom: 40px;
   box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
   border: 1px solid rgba(255, 255, 255, 0.18);
+  transition: all 0.3s ease;
 }
 
-.player-form h2 {
-  margin: 0 0 20px 0;
+.enhanced-player-form:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px rgba(31, 38, 135, 0.5);
+}
+
+.form-header h2 {
+  margin: 0 0 24px 0;
   color: #333;
   font-weight: 600;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
-.player-form div {
+.form-icon {
+  font-size: 1.8rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.form-fields {
   display: flex;
-  gap: 15px;
-  align-items: center;
+  gap: 20px;
+  align-items: end;
   flex-wrap: wrap;
 }
 
-.player-form input,
-.player-form select {
-  padding: 12px 16px;
+.input-group {
+  display: flex;
+  flex-direction: column;
+  min-width: 180px;
+  flex: 1;
+}
+
+.input-group label {
+  font-weight: 500;
+  color: #555;
+  margin-bottom: 8px;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+}
+
+.enhanced-input {
+  padding: 14px 16px;
   border: 2px solid #e1e5e9;
   border-radius: 12px;
   font-size: 16px;
-  transition: border-color 0.2s ease;
+  transition: all 0.2s ease;
   background: white;
-  min-width: 200px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  position: relative;
 }
 
-.player-form input:focus,
-.player-form select:focus {
+.enhanced-input:focus {
   outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+  transform: translateY(-1px);
+}
+
+.enhanced-input::placeholder {
+  color: #999;
+  font-style: italic;
+}
+
+.enhanced-select-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.enhanced-select {
+  width: 100%;
+  padding: 14px 40px 14px 16px;
+  border: 2px solid #e1e5e9;
+  border-radius: 12px;
+  font-size: 16px;
+  background: white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  appearance: none;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.enhanced-select:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+  transform: translateY(-1px);
+}
+
+.enhanced-select:hover {
   border-color: #667eea;
 }
 
-.player-form button {
-  padding: 12px 24px;
+.select-arrow {
+  position: absolute;
+  right: 12px;
+  pointer-events: none;
+  color: #667eea;
+  transition: transform 0.2s ease;
+}
+
+.enhanced-select:focus + .select-arrow {
+  transform: rotate(180deg);
+}
+
+.enhanced-button {
+  padding: 14px 28px;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
   border: none;
@@ -107,17 +188,74 @@ code {
   font-size: 16px;
   font-weight: 600;
   cursor: pointer;
-  transition: opacity 0.2s ease;
-  min-width: 120px;
+  transition: all 0.2s ease;
+  min-width: 140px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
 }
 
-.player-form button:hover:not(:disabled) {
-  opacity: 0.9;
+.enhanced-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s ease;
 }
 
-.player-form button:disabled {
+.enhanced-button:hover::before {
+  left: 100%;
+}
+
+.enhanced-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+.enhanced-button:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.enhanced-button:disabled {
   opacity: 0.6;
   cursor: not-allowed;
+  transform: none;
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.2);
+}
+
+.button-text {
+  position: relative;
+  z-index: 1;
+}
+
+/* Responsive Design for Enhanced Form */
+@media (max-width: 768px) {
+  .enhanced-player-form {
+    padding: 24px;
+  }
+  
+  .form-fields {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .input-group {
+    min-width: auto;
+    width: 100%;
+  }
+  
+  .enhanced-button {
+    width: 100%;
+    margin-top: 12px;
+  }
+  
+  .form-header h2 {
+    font-size: 1.3rem;
+    text-align: center;
+  }
 }
 
 /* Team sections */

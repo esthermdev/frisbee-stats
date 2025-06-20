@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import playerService from '../services/playerService';
 
 const PlayerForm = ({ onPlayerCreated }) => {
@@ -25,25 +25,56 @@ const PlayerForm = ({ onPlayerCreated }) => {
   };
 
   return (
-    <form className="player-form" onSubmit={handleSubmit}>
-      <h2>Add New Player</h2>
-      <div>
-        <input
-          type="text"
-          placeholder="Player Name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          required
-        />
-        <select 
-          value={team} 
-          onChange={(e) => setTeam(e.target.value)}
+    <form className="enhanced-player-form" onSubmit={handleSubmit}>
+      <div className="form-header">
+        <h2>
+          <span className="form-icon">👤</span>
+          Add New Player
+        </h2>
+      </div>
+      
+      <div className="form-fields">
+        <div className="input-group">
+          <label htmlFor="player-name">Player Name</label>
+          <input
+            id="player-name"
+            type="text"
+            placeholder="Enter player name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            required
+            className="enhanced-input"
+          />
+        </div>
+        
+        <div className="input-group">
+          <label htmlFor="team-select">Team</label>
+          <div className="enhanced-select-wrapper">
+            <select 
+              id="team-select"
+              value={team} 
+              onChange={(e) => setTeam(e.target.value)}
+              className="enhanced-select"
+            >
+              <option value="Offence">Offence</option>
+              <option value="Defence">Defence</option>
+            </select>
+            <div className="select-arrow">
+              <svg width="12" height="8" viewBox="0 0 12 8" fill="none">
+                <path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+        
+        <button 
+          type="submit" 
+          disabled={isSubmitting}
+          className="enhanced-button"
         >
-          <option value="Offence">Offence</option>
-          <option value="Defence">Defence</option>
-        </select>
-        <button type="submit" disabled={isSubmitting}>
-          {isSubmitting ? 'Adding...' : 'Add Player'}
+          <span className="button-text">
+            {isSubmitting ? 'Adding...' : 'Add Player'}
+          </span>
         </button>
       </div>
     </form>
