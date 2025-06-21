@@ -9,5 +9,6 @@ router.patch('/:id/stat/:stat', playerController.updatePlayerStat);
 router.post('/:id/turnover', playerController.addTurnover);
 router.delete('/:id/turnover/remove', playerController.removeTurnover);
 router.delete('/:id', playerController.deletePlayer);
+router.post('/reset-all', playerController.resetAllStats);
 
 module.exports = router;

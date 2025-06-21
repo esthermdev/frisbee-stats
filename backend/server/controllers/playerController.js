@@ -79,6 +79,16 @@ class PlayerController {
       res.status(400).json({ error: 'Failed to delete player' });
     }
   }
+
+  async resetAllStats(req, res) {
+    try {
+      await playerService.resetAllStats();
+      res.json({ success: true, message: 'All player stats have been reset to 0' });
+    } catch (error) {
+      console.error('Error resetting all stats:', error);
+      res.status(500).json({ error: 'Failed to reset all stats' });
+    }
+  }
 }
 
 module.exports = new PlayerController();

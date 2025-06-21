@@ -271,6 +271,31 @@ class PlayerService {
       where: { id: parseInt(id) }
     });
   }
+
+  async resetAllStats() {
+    // Reset all player stats to 0
+    await prisma.player.updateMany({
+      data: {
+        opp: 0,
+        dpp: 0,
+        touches: 0,
+        goals: 0,
+        assists: 0,
+        defense: 0,
+        hucks: 0,
+        rzto: 0,
+        hto: 0,
+        resetTo: 0,
+        receiverErr: 0,
+        throwerErr: 0
+      }
+    });
+
+    // Delete all turnover records
+    await prisma.turnover.deleteMany({});
+
+    return { success: true };
+  }
 }
 
 module.exports = new PlayerService();

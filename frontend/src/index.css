@@ -282,7 +282,15 @@ code {
   font-weight: 700;
 }
 
-/* Export button */
+/* Header buttons */
+.header-buttons {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
 .export-btn {
   background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
   color: white;
@@ -292,11 +300,31 @@ code {
   cursor: pointer;
   font-size: 14px;
   font-weight: 600;
-  transition: opacity 0.2s ease;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(72, 187, 120, 0.3);
 }
 
 .export-btn:hover {
-  opacity: 0.9;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(72, 187, 120, 0.4);
+}
+
+.reset-all-btn {
+  background: linear-gradient(135deg, #e53e3e 0%, #c53030 100%);
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(229, 62, 62, 0.3);
+}
+
+.reset-all-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(229, 62, 62, 0.4);
 }
 
 /* Players table */
@@ -489,7 +517,8 @@ code {
   max-width: 500px;
   width: 90%;
   max-height: 80vh;
-  overflow-y: auto;
+  overflow-y: scroll;
+  scrollbar-width: none;
   box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
   animation: modalSlideIn 0.3s ease;
 }
@@ -559,6 +588,19 @@ code {
   border-radius: 16px;
   border: 2px solid #81e6d9;
 }
+
+#timestamp {
+  margin-left: 8px;
+  padding: 10px 10px;
+  width: 250px;
+  border: 2px solid #e1e5e9;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: all 0.2s ease;
+  background: white;
+  position: relative;
+}
+
 
 .turnover-summary h4 {
   margin: 0 0 10px 0;

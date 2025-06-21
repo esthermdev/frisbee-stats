@@ -37,6 +37,11 @@ class PlayerService {
     await axios.delete(`${API_BASE_URL}/players/${playerId}`);
     return true;
   }
+
+  async resetAllStats() {
+    const response = await axios.post(`${API_BASE_URL}/players/reset-all`);
+    return response.data;
+  }
 }
 
 const playerServiceInstance = new PlayerService();
