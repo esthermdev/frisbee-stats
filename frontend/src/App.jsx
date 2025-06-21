@@ -83,14 +83,14 @@ function App() {
       
       <PlayerTable 
         players={players}
-        team="Offence"
+        team="Line 1"
         onPlayerUpdated={handlePlayerUpdated}
         onPlayerDeleted={handlePlayerDeleted}
       />
       
       <PlayerTable 
         players={players}
-        team="Defence"
+        team="Line 2"
         onPlayerUpdated={handlePlayerUpdated}
         onPlayerDeleted={handlePlayerDeleted}
       />

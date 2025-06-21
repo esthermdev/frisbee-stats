@@ -15,10 +15,8 @@ class PlayerService {
       
       // Map team values from DB to frontend expected values
       const teamMapping = {
-        'O': 'Offence',
-        'D': 'Defence',
-        'Offence': 'Offence',
-        'Defence': 'Defence'
+        '1': 'Line 1',
+        '2': 'Line 2',
       };
       
       const safePlayerStats = {
@@ -64,10 +62,8 @@ class PlayerService {
     const { turnovers: playerTurnovers, ...playerStats } = player;
     
     const teamMapping = {
-      'O': 'Offence',
-      'D': 'Defence',
-      'Offence': 'Offence',
-      'Defence': 'Defence'
+      '1': 'Line 1',
+      '2': 'Line 2',
     };
     
     const safePlayerStats = {
@@ -146,10 +142,9 @@ class PlayerService {
     const { turnovers: playerTurnovers, ...playerStats } = player;
     
     const teamMapping = {
-      'O': 'Offence',
-      'D': 'Defence',
-      'Offence': 'Offence',
-      'Defence': 'Defence'
+      '1': 'Line 1',
+      '2': 'Line 2',
+
     };
     
     const safePlayerStats = {
@@ -237,10 +232,9 @@ class PlayerService {
     const { turnovers: playerTurnovers, ...playerStats } = player;
     
     const teamMapping = {
-      'O': 'Offence',
-      'D': 'Defence',
-      'Offence': 'Offence',
-      'Defence': 'Defence'
+      '1': 'Line 1',
+      '2': 'Line 2',
+
     };
     
     const safePlayerStats = {

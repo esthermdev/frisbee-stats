@@ -31,7 +31,7 @@ model Player {
   throwerErr  Int        @default(0) // Thrower Error
   // Relation to track detailed turnover events
   turnovers   Turnover[]
-  team        String // "Offence" or "Defence"
+  team        String 
 }
 
 model Turnover {

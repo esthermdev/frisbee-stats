@@ -3,7 +3,7 @@ import playerService from '../services/playerService';
 
 const PlayerForm = ({ onPlayerCreated }) => {
   const [name, setName] = useState('');
-  const [team, setTeam] = useState('Offence');
+  const [team, setTeam] = useState('Line 1');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async (e) => {
@@ -15,7 +15,7 @@ const PlayerForm = ({ onPlayerCreated }) => {
       const newPlayer = await playerService.createPlayer(name.trim(), team);
       onPlayerCreated(newPlayer);
       setName('');
-      setTeam('Offence');
+      setTeam('Line 1');
     } catch (error) {
       console.error('Error creating player:', error);
       alert('Failed to create player');
@@ -56,8 +56,8 @@ const PlayerForm = ({ onPlayerCreated }) => {
               onChange={(e) => setTeam(e.target.value)}
               className="enhanced-select"
             >
-              <option value="Offence">Offence</option>
-              <option value="Defence">Defence</option>
+              <option value="Line 1">Line 1</option>
+              <option value="Line 2">Line 2</option>
             </select>
             <div className="select-arrow">
               <svg width="12" height="8" viewBox="0 0 12 8" fill="none">

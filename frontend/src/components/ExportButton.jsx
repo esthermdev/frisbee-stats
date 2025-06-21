@@ -10,8 +10,8 @@ const ExportButton = ({ players }) => {
     }
 
     // Separate players by team
-    const offencePlayers = players.filter(player => player.team === 'Offence');
-    const defencePlayers = players.filter(player => player.team === 'Defence');
+    const lineOnePlayers = players.filter(player => player.team === 'Line 1');
+    const lineTwoPlayers = players.filter(player => player.team === 'Line 2');
 
     // Create export data for both teams
     const createExportData = (teamPlayers) => {
@@ -69,18 +69,18 @@ const ExportButton = ({ players }) => {
     // Create workbook
     const workbook = XLSX.utils.book_new();
 
-    // Add Offence sheet
-    if (offencePlayers.length > 0) {
-      const offenceData = createExportData(offencePlayers);
-      const offenceWorksheet = XLSX.utils.json_to_sheet(offenceData);
-      XLSX.utils.book_append_sheet(workbook, offenceWorksheet, 'Offence');
+    // Add Line 1 sheet
+    if (lineOnePlayers.length > 0) {
+      const lineOneData = createExportData(lineOnePlayers);
+      const lineOneWorksheet = XLSX.utils.json_to_sheet(lineOneData);
+      XLSX.utils.book_append_sheet(workbook, lineOneWorksheet, 'Line 1');
     }
 
-    // Add Defence sheet
-    if (defencePlayers.length > 0) {
-      const defenceData = createExportData(defencePlayers);
-      const defenceWorksheet = XLSX.utils.json_to_sheet(defenceData);
-      XLSX.utils.book_append_sheet(workbook, defenceWorksheet, 'Defence');
+    // Add Line 2 sheet
+    if (lineTwoPlayers.length > 0) {
+      const lineTwoData = createExportData(lineTwoPlayers);
+      const lineTwoWorksheet = XLSX.utils.json_to_sheet(lineTwoData);
+      XLSX.utils.book_append_sheet(workbook, lineTwoWorksheet, 'Defence');
     }
 
     // Add combined sheet
